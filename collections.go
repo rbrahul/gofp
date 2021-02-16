@@ -3,10 +3,7 @@ package gofp
 /* Collection Utils
 TODO:
 - groupBy()
-- shuffle()
-- random()
 - fill()
-- unique()
 */
 
 // Map returns a new slice with transformed elements
@@ -131,4 +128,64 @@ func Range(args ...int) []int {
 		items = append(items, i)
 	}
 	return items
+}
+
+// Uniq returns a new slice of unique items
+func Uniq(items []interface{}) []interface{} {
+	uniqueItems := []interface{}{}
+	for _, item := range items {
+		if !Contains(uniqueItems, item) {
+			uniqueItems = append(uniqueItems, item)
+		}
+	}
+	return uniqueItems
+}
+
+// IndexOf returns the poisition of the item in a slice, if item doesn't exist returns -1 otherwise
+func IndexOf(items []interface{}, item interface{}) int {
+	var beg, end int
+	end = len(items) - 1
+	for beg <= end {
+		if item == items[beg] {
+			return beg
+		}
+		if item == items[end] {
+			return end
+		}
+		beg++
+		end--
+	}
+	return -1
+}
+
+// Contains returns true if item exists in the slice and false otherwise
+func Contains(items []interface{}, item interface{}) bool {
+	return IndexOf(items, item) > -1
+}
+
+//Shuffle returns a new slice with shuffled elements
+func Shuffle(items []interface{}) []interface{} {
+	copiedSlice := make([]interface{}, len(items))
+	for i := range items {
+		copiedSlice[i] = items[i]
+	}
+	for i := range items {
+		index := randomer().Intn(len(items) - 1)
+		temp := copiedSlice[index]
+		copiedSlice[index] = copiedSlice[i]
+		copiedSlice[i] = temp
+	}
+	return copiedSlice
+}
+
+var prevChosenItem interface{}
+
+//ChooseRandom returns a random element from the slice
+func ChooseRandom(items []interface{}) interface{} {
+	index := randomer().Intn(len(items) - 1)
+	for items[index] == prevChosenItem {
+		index = randomer().Intn(len(items) - 1)
+	}
+	prevChosenItem = items[index]
+	return items[index]
 }
