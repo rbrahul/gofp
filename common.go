@@ -5,12 +5,8 @@ import (
 	"time"
 )
 
-// get
-// set
-// equal
-// deepEual
-
-func randomer() *rand.Rand {
+//Randomer returns a Rand with seed which helps to generate unique randome numbers each time
+func Randomer() *rand.Rand {
 	seed := rand.NewSource(time.Now().UnixNano())
 	return rand.New(seed)
 }

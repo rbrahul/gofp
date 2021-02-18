@@ -6,11 +6,6 @@ import (
 	"strings"
 )
 
-/**MAP UTILS
-- get()
-- merge()
-*/
-
 // Keys returns all the keys of any map
 func Keys(mapData map[string]interface{}) []string {
 	keys := []string{}
@@ -102,15 +97,32 @@ func Extend(initialMap map[string]interface{}, extendingMap map[string]interface
 }
 
 //Get returns the value by path, if path is invalid returns nil
-func Get(mapData interface{}, path string) interface{} {
+func Get(args ...interface{}) interface{} {
+	if len(args) < 2 {
+		panic("Invalid number of argument. Atleast 2 arguments are required")
+	}
+	var (
+		path     string
+		mapData  interface{}
+		fallback interface{}
+	)
+	if len(args) >= 1 {
+		mapData = args[0]
+	}
+	if len(args) >= 2 {
+		path = args[1].(string)
+	}
+	if len(args) >= 3 {
+		fallback = args[2]
+	}
 	if mapData == nil {
-		return nil
+		return fallback
 	}
 	defer func() interface{} {
 		if r := recover(); r != nil {
-			return nil
+			return fallback
 		}
-		return nil
+		return fallback
 	}()
 	data := mapData
 	paths := strings.Split(path, ".")
@@ -125,7 +137,7 @@ func Get(mapData interface{}, path string) interface{} {
 		if dataType == reflect.Slice {
 			indx, err := strconv.Atoi(key)
 			if err != nil {
-				return nil
+				return fallback
 			}
 			data = value.Index(indx).Interface().(interface{})
 			continue
@@ -135,15 +147,16 @@ func Get(mapData interface{}, path string) interface{} {
 			data = value.FieldByName(key).Interface().(interface{})
 			continue
 		}
+
 		if dataType == reflect.String {
 			indx, err := strconv.Atoi(key)
 			if err != nil {
-				return nil
+				return fallback
 			}
 			data = string(data.(string)[indx])
 			continue
 		}
-		return nil
+		return fallback
 	}
 	return data
 }

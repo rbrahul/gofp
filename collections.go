@@ -1,12 +1,5 @@
 package gofp
 
-/* Collection Utils
-TODO:
-- groupBy()
-- Fill()
-- Find
-*/
-
 // Map returns a new slice with transformed elements
 func Map(fn func(index int, item interface{}) interface{}, items []interface{}) []interface{} {
 	mappedItems := []interface{}{}
@@ -14,6 +7,47 @@ func Map(fn func(index int, item interface{}) interface{}, items []interface{}) 
 		mappedItems = append(mappedItems, fn(index, value))
 	}
 	return mappedItems
+}
+
+//Fill substitues the elements of slice with given string from the start to end position
+func Fill(args ...interface{}) []interface{} {
+	var (
+		filler string
+		items  []interface{}
+		start  int
+		end    int
+	)
+
+	if len(args) < 2 {
+		panic("Invalid number of arguments has been passed, at least 2 arguments are required")
+	}
+	if len(args) >= 1 {
+		items = args[0].([]interface{})
+		start = 0
+		end = len(items)
+	}
+
+	if len(args) >= 2 {
+		filler = args[1].(string)
+	}
+
+	if len(args) >= 3 {
+		start = args[2].(int)
+	}
+
+	if len(args) >= 4 {
+		end = args[3].(int)
+	}
+
+	newItems := []interface{}{}
+	for index, value := range items {
+		if index >= start && index < end {
+			newItems = append(newItems, filler)
+			continue
+		}
+		newItems = append(newItems, value)
+	}
+	return newItems
 }
 
 // Filter returns a new slice of items which satisfies the condition
@@ -58,6 +92,31 @@ func Any(fn func(index int, item interface{}) bool, items []interface{}) bool {
 	return false
 }
 
+// Find returns a item from the slice if that element satisfies the given condition with the function
+func Find(fn func(index int, item interface{}) bool, items []interface{}) interface{} {
+	for index, value := range items {
+		if fn(index, value) {
+			return value
+		}
+	}
+	return nil
+}
+
+// GroupBy returns a item from the slice if that element satisfies the given condition with the function
+func GroupBy(fn func(item interface{}) string, items []interface{}) interface{} {
+	group := map[string]interface{}{}
+	for _, value := range items {
+		key := fn(value)
+		if Has(group, key) {
+			group[key] = append(group[key].([]interface{}), value)
+		} else {
+			items := []interface{}{}
+			group[key] = append(items, value)
+		}
+	}
+	return group
+}
+
 // Head returns the first item of slice if exist otherwise nil
 func Head(items []interface{}) interface{} {
 	if len(items) >= 1 {
@@ -84,7 +143,7 @@ func Reverse(items []interface{}) []interface{} {
 }
 
 // Chunk returns a new slice of reversed items
-func Chunk(items []interface{}, size int) []interface{} {
+func Chunk(size int, items []interface{}) []interface{} {
 	chunks := []interface{}{}
 	startAt := 0
 	lengthOfItems := len(items)
@@ -171,7 +230,7 @@ func Shuffle(items []interface{}) []interface{} {
 		copiedSlice[i] = items[i]
 	}
 	for i := range items {
-		index := randomer().Intn(len(items) - 1)
+		index := Randomer().Intn(len(items) - 1)
 		temp := copiedSlice[index]
 		copiedSlice[index] = copiedSlice[i]
 		copiedSlice[i] = temp
@@ -183,9 +242,9 @@ var prevChosenItem interface{}
 
 //ChooseRandom returns a random element from the slice
 func ChooseRandom(items []interface{}) interface{} {
-	index := randomer().Intn(len(items) - 1)
+	index := Randomer().Intn(len(items) - 1)
 	for items[index] == prevChosenItem {
-		index = randomer().Intn(len(items) - 1)
+		index = Randomer().Intn(len(items) - 1)
 	}
 	prevChosenItem = items[index]
 	return items[index]
