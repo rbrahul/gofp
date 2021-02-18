@@ -1,7 +1,7 @@
 package gofp
 
 // Map returns a new slice with transformed elements
-func Map(fn func(index int, item interface{}) interface{}, items []interface{}) []interface{} {
+func Map(items []interface{}, fn func(index int, item interface{}) interface{}) []interface{} {
 	mappedItems := []interface{}{}
 	for index, value := range items {
 		mappedItems = append(mappedItems, fn(index, value))
@@ -51,7 +51,7 @@ func Fill(args ...interface{}) []interface{} {
 }
 
 // Filter returns a new slice of items which satisfies the condition
-func Filter(fn func(index int, item interface{}) bool, items []interface{}) []interface{} {
+func Filter(items []interface{}, fn func(index int, item interface{}) bool) []interface{} {
 	filteredItems := []interface{}{}
 	for index, value := range items {
 		if fn(index, value) {
@@ -64,7 +64,7 @@ func Filter(fn func(index int, item interface{}) bool, items []interface{}) []in
 type reduceFnArgType func(index int, current interface{}, accumulator interface{}, source []interface{}) interface{}
 
 // Reduce iterate overs all the items in the slice and returns accumulated result
-func Reduce(fn reduceFnArgType, items []interface{}, initialValue interface{}) interface{} {
+func Reduce(items []interface{}, fn reduceFnArgType, initialValue interface{}) interface{} {
 	accumulator := initialValue
 	for index, value := range items {
 		accumulator = fn(index, value, accumulator, items)
@@ -73,7 +73,7 @@ func Reduce(fn reduceFnArgType, items []interface{}, initialValue interface{}) i
 }
 
 // Every returns true if all the items satisfies the given condition with the function
-func Every(fn func(index int, item interface{}) bool, items []interface{}) bool {
+func Every(items []interface{}, fn func(index int, item interface{}) bool) bool {
 	for index, value := range items {
 		if !fn(index, value) {
 			return false
@@ -83,7 +83,7 @@ func Every(fn func(index int, item interface{}) bool, items []interface{}) bool 
 }
 
 // Any returns true if any of the item satisfies the given condition with the function
-func Any(fn func(index int, item interface{}) bool, items []interface{}) bool {
+func Any(items []interface{}, fn func(index int, item interface{}) bool) bool {
 	for index, value := range items {
 		if fn(index, value) {
 			return true
@@ -93,7 +93,7 @@ func Any(fn func(index int, item interface{}) bool, items []interface{}) bool {
 }
 
 // Find returns a item from the slice if that element satisfies the given condition with the function
-func Find(fn func(index int, item interface{}) bool, items []interface{}) interface{} {
+func Find(items []interface{}, fn func(index int, item interface{}) bool) interface{} {
 	for index, value := range items {
 		if fn(index, value) {
 			return value
@@ -103,7 +103,7 @@ func Find(fn func(index int, item interface{}) bool, items []interface{}) interf
 }
 
 // GroupBy returns a item from the slice if that element satisfies the given condition with the function
-func GroupBy(fn func(item interface{}) string, items []interface{}) interface{} {
+func GroupBy(items []interface{}, fn func(item interface{}) string) map[string]interface{} {
 	group := map[string]interface{}{}
 	for _, value := range items {
 		key := fn(value)
@@ -143,7 +143,7 @@ func Reverse(items []interface{}) []interface{} {
 }
 
 // Chunk returns a new slice of reversed items
-func Chunk(size int, items []interface{}) []interface{} {
+func Chunk(items []interface{}, size int) []interface{} {
 	chunks := []interface{}{}
 	startAt := 0
 	lengthOfItems := len(items)
