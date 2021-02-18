@@ -3,7 +3,8 @@ package gofp
 /* Collection Utils
 TODO:
 - groupBy()
-- fill()
+- Fill()
+- Find
 */
 
 // Map returns a new slice with transformed elements
