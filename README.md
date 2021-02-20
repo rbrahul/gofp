@@ -23,9 +23,14 @@ go get github.com/rbrahul/gofp
 ## How to use?
 This the example how you can implement pipe operations using `gofp`
 ```go
+
 package main
 
-import "github.com/rbrahul/gofp"
+import (
+"fmt"
+"strings"
+"github.com/rbrahul/gofp"
+)
 
 func main() {
 	user := map[string]interface{}{
@@ -50,14 +55,13 @@ func main() {
 		return strings.ToUpper(data.(string))
 	}
 
-	email := Pipe(
+	email := gofp.Pipe(
 		getContacts,
 		getEmail,
 		getUpperCaseEmail,
 	)(user)
 
-    fmt.Println("Email is: ", email)
+    fmt.Println("Email is: ", email) // Output: Email is: JOHNDOE@GMAIL.COM
 
-    // Output: Email is: JOHNDOE@GMAIL.COM
 }
 ```
