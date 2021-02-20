@@ -203,17 +203,10 @@ func Uniq(items []interface{}) []interface{} {
 
 // IndexOf returns the poisition of the item in a slice, if item doesn't exist returns -1 otherwise
 func IndexOf(items []interface{}, item interface{}) int {
-	var beg, end int
-	end = len(items) - 1
-	for beg <= end {
-		if item == items[beg] {
-			return beg
+	for index, value := range items {
+		if value == item {
+			return index
 		}
-		if item == items[end] {
-			return end
-		}
-		beg++
-		end--
 	}
 	return -1
 }

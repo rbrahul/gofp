@@ -111,3 +111,27 @@ func Test_Range(t *testing.T) {
 		t.Errorf("Range() = %v, want %v", len(rangeItems), 6)
 	}
 }
+
+func Test_Uniq(t *testing.T) {
+	// [1,2,3,10,4,5,100]
+	uniqueItems := Uniq([]interface{}{1, 2, 2, 3, 10, 4, 5, 10, 100})
+	if len(uniqueItems) != 7 {
+		t.Errorf("Uniq() = %v, want %v", len(uniqueItems), 7)
+	}
+}
+
+func Test_IndexOf(t *testing.T) {
+	// 4
+	index := IndexOf([]interface{}{1, 2, 2, 3, 10, 4, 5, 10, 100}, 10)
+	if index != 4 {
+		t.Errorf("IndexOf() = %v, want %v", index, 4)
+	}
+}
+
+func Test_Contains(t *testing.T) {
+	// 4
+	exists := Contains([]interface{}{1, 2, 2, 3, 10, 4, 5, 10, 100}, 10)
+	if !exists {
+		t.Errorf("IndexOf() = %v, want %v", exists, true)
+	}
+}
