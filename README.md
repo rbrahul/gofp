@@ -287,7 +287,7 @@ Returns `true` if the given item exists in the slice or false otherwise.
 
 ```go
     ...
-	exists := Contains([]interface{}{1, 2, 2, 3, 10, 4, 5, 10, 100}, 10)
+    exists := Contains([]interface{}{1, 2, 2, 3, 10, 4, 5, 10, 100}, 10)
     fmt.Println(exists) //Output: true
     ...
 ```
@@ -298,18 +298,18 @@ Returns a randomly selected element of the slice. It has one parameter which is 
 
 ```go
     ...
-	randomElement := ChooseRandom([]interface{}{1, 2, 3, 4, 5, 10, 100})
+    randomElement := ChooseRandom([]interface{}{1, 2, 3, 4, 5, 10, 100})
     fmt.Println("Could be any:",randomElement) //Output Could be any: 4 
     ...
 ```
 
 ### Shuffle
 
-Returns a new slice where elements are randomly ordered. It accepts one parameter which is slice.
+Returns a new slice where elements are randomly ordered(shuffled). It accepts one parameter which is slice.
 
 ```go
     ...
-	randomElement := ChooseRandom([]interface{}{1, 2, 3, 4, 5, 10, 100})
-    fmt.Println("Could be any:",randomElement) //Output Could be any: 4 
+    shuffledItems := ChooseRandom([]interface{}{1, 2, 3, 4, 5, 10, 100})
+    fmt.Println(shuffledItems) //Output: {100, 2, 1, 4, 5, 3, 10} 
     ...
 ```
