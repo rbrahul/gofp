@@ -68,6 +68,15 @@ func Test_Find(t *testing.T) {
 	}
 }
 
+func Test_Reduce(t *testing.T) {
+	reducedItems := Reduce([]interface{}{10, 20, 30, 40}, func(index int, current interface{}, accumulator interface{}, source []interface{}) interface{} {
+		return accumulator.(int) + current.(int)
+	}, 0)
+	if reducedItems.(int) != 100 {
+		t.Errorf("Reduce() = %v, want %v", reducedItems, 100)
+	}
+}
+
 func Test_GroupBy(t *testing.T) {
 	groupedData := GroupBy([]interface{}{
 		map[string]interface{}{"name": "Ron", "sex": "male", "age": 17},
