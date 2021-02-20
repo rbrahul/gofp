@@ -43,6 +43,15 @@ func Test_Any(t *testing.T) {
 		t.Errorf("Any() = %v, want %v", isAnyoneFortieth, true)
 	}
 }
+func Test_Filter(t *testing.T) {
+	// 20,23,40,25
+	moreThan20 := Filter([]interface{}{12, 16, 18, 20, 23, 40, 25}, func(i int, age interface{}) bool {
+		return age.(int) >= 20
+	})
+	if len(moreThan20) != 4 {
+		t.Errorf("Filter() = %v, want %v", len(moreThan20), 4)
+	}
+}
 
 func Test_Find(t *testing.T) {
 	firstAdult := Find([]interface{}{
