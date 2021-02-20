@@ -1,14 +1,14 @@
 ## A simple Utility library for Go
 
-Go doesn't not provide lot of useful methods while working with data structure like Slice and Map. This library provides most frequently needed utility functions which is inspired from lodash(a Javascript Utility library).
+Go does not provide a many essential functions while working with the data structure like Slice and Map. This library provides most frequently needed utility functions which is inspired from lodash(a Javascript Utility library).
 
-## Why do I need this
+## Why do I need gofp ?
 
-- Implementing Functional programming is way easier using `Pipe(), Compose(), Reduce(), Map(), Filter(), Extend(), Find() etc.`
+- Implementing Functional programming is way easier using `Pipe(), Compose(), Reduce(), Map(), Filter(), Extend(), Find() and many others`.
 
-- This library offers many utility function for dealing with collections or slice related operation
+- This library offers many utility function for dealing with collections or slice related operation.
 
-- Access any property by path or index from the map, slice and even struct by simply using the most useful function `Get`
+- Access any property by path or index from the map, slice and even struct by simply using the most useful function `Get`.
 
 - Utility functions are implmented based on `interface{}`. The main focus is not to use the `reflect` package whenever possible.
 
@@ -138,5 +138,178 @@ Returns `true` if each element matches the condition of the given iterator funct
 		    return age.(int) >= 18
 	    })
     fmt.Println(isEveryOneIsAdult) //Output:  true
+    ...
+```
+
+### Any
+Returns `true` if any of the element matches the condition of the given iterator function. If there is no such element that satisfy the condition of the function then it returns `false`. Any has 2 parameters, 1st one is the slice and 2nd one is the iterator function. And the iterator function must have 2 parameters, index and current value of that iteration.
+
+```go
+    ...
+     hasAnyAdult := Any([]interface{}{18, 20, 23, 40, 25},
+        func(i int, age interface{}) bool {
+		    return age.(int) >= 18
+	    })
+    fmt.Println(hasAnyAdult) //Output:  true
+    ...
+```
+
+### GroupBy
+
+Returns a new map composed of keys generated from the results of running each element of slice thru iterator function. The order of grouped values is determined by the order they occur in slice. GroupBy has 2 parameters, 1st one is the slice and 2nd one is the iterator function. The output of the iterator function will be used as the key of the newly created group or map. And the iterator function must have 2 parameters, index and current value of that iteration.
+
+```go
+    ...
+     groupedData := GroupBy([]interface{}{
+            map[string]interface{}{"name": "Ron", "sex": "male", "age": 17},
+            map[string]interface{}{"name": "Raymond", "sex": "male", "age": 20},
+            map[string]interface{}{"name": "Sofia", "sex": "female", "age": 20},
+            map[string]interface{}{"name": "Roni", "sex": "male", "age": 30},
+	    }, func(person interface{}) string {
+		    return strconv.Itoa(person.(map[string]interface{})["age"].(int))
+	})
+    fmt.Println(groupedData) 
+    /*
+    Output:
+      { 
+          "17": [{"name": "Ron", "sex": "male", "age": 17}],
+          "20": [
+                {"name": "Raymond", "sex": "male", "age": 20},
+                {"name": "Sofia", "sex": "female", "age": 20}
+               ],
+          "30": [{"name": "Roni", "sex": "male", "age": 30}]
+     }
+    */
+    ...
+```
+
+### Chunk
+
+Returns a new slice(chunks) of slices. Every slice has fixed number of elements which was given as a limit in the 2nd parameter. Chunk accepts 2 parameters, 1st one is the slice and 2nd one is the limit which will define the maxium number of elements in each slice.
+
+```go
+    ...
+	chunkedItems := Chunk([]interface{}{1, 2, 3, 4, 5}, 2)
+    fmt.Println(chunkedItems) //Output:  {{1,2},{3,4},{5}}
+    ...
+```
+### Reverse
+
+Returns a new slice with all the elements in reveresed order. Reverse accepsts 1 parameter which a slice.
+
+```go
+    ...
+    reveresed := Reverse([]interface{}{10, 20, 30, 40, 50})
+    fmt.Println(reveresed) //Output:  {50,40,30,20,10}
+    ...
+```
+
+### Range
+
+Returns a new slice of range where the value starts from 1st parameter to the 2nd parameter. Reverse accepsts 2 parameters, 1st one is the starting value 2nd one is the maximum value in the range.
+
+```go
+    ...
+    rangeItems := Range(5, 10)
+    fmt.Println(rangeItems) //Output:  {5,6,7,8,9,10}
+    ...
+```
+
+### Uniq
+
+Returns a new slice where each elements are unique removing all the duplicate elements. `Uniq` accepsts 1 parameter which is a slice.
+
+```go
+    ...
+    // [1,2,3,10,4,5,100]
+	uniqueItems := Uniq([]interface{}{1, 2, 2, 3, 10, 4, 5, 10, 100})
+    fmt.Println(uniqueItems) //Output:  {1,2,3,10,4,5,100}
+    ...
+```
+
+### Head
+
+Returns the first matched element of the slice. Head accepsts 1 parameter which a slice.
+
+```go
+    ...
+      firstItem := Head([]interface{}{
+            map[string]interface{}{"name": "Ron", "sex": "male", "age": 17},
+            map[string]interface{}{"name": "Raymond", "sex": "male", "age": 20},
+            map[string]interface{}{"name": "Sofia", "sex": "female", "age": 20},
+            map[string]interface{}{"name": "Roni", "sex": "male", "age": 30},
+        })
+    fmt.Println(firstItem) //Output:  {"name": "Ron", "sex": "male", "age": 17}
+    ...
+```
+
+### Tail
+
+Returns the last matched element of the slice. Head accepsts 1 parameter which a slice.
+
+```go
+    ...
+      lastItem := Tail([]interface{}{
+            map[string]interface{}{"name": "Ron", "sex": "male", "age": 17},
+            map[string]interface{}{"name": "Raymond", "sex": "male", "age": 20},
+            map[string]interface{}{"name": "Sofia", "sex": "female", "age": 20},
+            map[string]interface{}{"name": "Roni", "sex": "male", "age": 30},
+        })
+    fmt.Println(lastItem) //Output:  {"name": "Roni", "sex": "male", "age": 30}
+    ...
+```
+
+### Fill
+
+Returns a new slice where every elements is replaced from the start to end index with the given string. `Fill` has 4 arguments first 2 are required and last two are optional. First one is slice, 2nd one is the string which will be used as substitute while filling/replacing and 3rd one is the starting index and 4th one is the end index. If start and end index is not given then it fills all the elements with given string.
+
+```go
+    ...
+	filledItems := Fill([]interface{}{1, 2, 3, 4, 5, 6, 7}, "*", 1, 5)
+    fmt.Println(filledItems) //Output:  {1, *, *, *, *, 6, 7}
+    ...
+```
+
+### IndexOf
+
+Returns the index of the first occurance of any element in the slice which is equal to the given item.
+
+```go
+    ...
+	index := IndexOf([]interface{}{1, 2, 2, 3, 10, 4, 5, 10, 100}, 10)
+    fmt.Println(index) //Output: 4
+    ...
+```
+
+### Contains
+
+Returns `true` if the given item exists in the slice or false otherwise.
+
+```go
+    ...
+	exists := Contains([]interface{}{1, 2, 2, 3, 10, 4, 5, 10, 100}, 10)
+    fmt.Println(exists) //Output: true
+    ...
+```
+
+### ChooseRandom
+
+Returns a randomly selected element of the slice. It has one parameter which is a slice.
+
+```go
+    ...
+	randomElement := ChooseRandom([]interface{}{1, 2, 3, 4, 5, 10, 100})
+    fmt.Println("Could be any:",randomElement) //Output Could be any: 4 
+    ...
+```
+
+### Shuffle
+
+Returns a new slice where elements are randomly ordered. It accepts one parameter which is slice.
+
+```go
+    ...
+	randomElement := ChooseRandom([]interface{}{1, 2, 3, 4, 5, 10, 100})
+    fmt.Println("Could be any:",randomElement) //Output Could be any: 4 
     ...
 ```

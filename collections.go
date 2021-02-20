@@ -61,10 +61,8 @@ func Filter(items []interface{}, fn func(index int, item interface{}) bool) []in
 	return filteredItems
 }
 
-type reduceFnArgType func(index int, current interface{}, accumulator interface{}, source []interface{}) interface{}
-
 // Reduce iterate overs all the items in the slice and returns accumulated result
-func Reduce(items []interface{}, fn reduceFnArgType, initialValue interface{}) interface{} {
+func Reduce(items []interface{}, fn func(index int, current interface{}, accumulator interface{}, source []interface{}) interface{}, initialValue interface{}) interface{} {
 	accumulator := initialValue
 	for index, value := range items {
 		accumulator = fn(index, value, accumulator, items)
@@ -142,7 +140,7 @@ func Reverse(items []interface{}) []interface{} {
 	return reversed
 }
 
-// Chunk returns a new slice of reversed items
+// Chunk Returns a new slice(chunks) of slices. Every slice has fixed number of elements which was given as a limit in the 2nd parameter
 func Chunk(items []interface{}, size int) []interface{} {
 	chunks := []interface{}{}
 	startAt := 0
