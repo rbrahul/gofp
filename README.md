@@ -474,3 +474,4 @@ Returns a new map omitting the given keys of that map. It accepts 2 parameters 1
     fmt.Println(extendedMap) //Output: {"firstName": "john","lastName": "doe","gender": "male"}
     ...
 ```
+
