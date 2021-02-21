@@ -1,3 +1,5 @@
+![test workflow](https://github.com/rbrahul/gofp/actions/workflows/go.yml/badge.svg)
+
 ## A simple Utility library for Go
 
 Go does not provide a many essential functions while working with the data structure like Slice and Map. This library provides most frequently needed utility functions which is inspired from lodash(a Javascript Utility library).
