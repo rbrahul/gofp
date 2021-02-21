@@ -3,6 +3,8 @@
 ![Go test workflow](https://github.com/rbrahul/gofp/actions/workflows/go.yml/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/rbrahul/gofp)](https://goreportcard.com/report/github.com/rbrahul/gofp)
 [![Go Reference](https://pkg.go.dev/badge/github.com/rbrahul/gofp.svg)](https://pkg.go.dev/github.com/rbrahul/gofp)
+[![codecov](https://codecov.io/gh/rbrahul/gofp/branch/master/graph/badge.svg?token=EMXLVVLB07)](https://codecov.io/gh/rbrahul/gofp)
+
 
 ## A simple Utility library for Go
 
