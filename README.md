@@ -1,12 +1,14 @@
+![gofp](gofp.png)
+
 ![Go test workflow](https://github.com/rbrahul/gofp/actions/workflows/go.yml/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/rbrahul/gofp)](https://goreportcard.com/report/github.com/rbrahul/gofp)
 [![Go Reference](https://pkg.go.dev/badge/github.com/rbrahul/gofp.svg)](https://pkg.go.dev/github.com/rbrahul/gofp)
 
 ## A simple Utility library for Go
 
-Go does not provide a many essential functions while working with the data structure like Slice and Map. This library provides most frequently needed utility functions which is inspired from lodash(a Javascript Utility library).
+Go does not provide a many essential built in functions when it comes to data structure such as **slice** and **map**. This library provides a list of most frequently needed utility functions which are inspired by lodash(a Javascript Utility library).
 
-## Why do I need gofp ?
+## Main features of gofp
 
 - Implementing Functional programming is way easier using `Pipe(), Compose(), Reduce(), Map(), Filter(), Extend(), Find() and many others`.
 
