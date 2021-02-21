@@ -4,14 +4,8 @@ package gofp
 - Curry()
 */
 
-// FunctionAsArg represents the type of fuction passed as operation
-type FunctionAsArg func(arg interface{}) interface{}
-
-// OperationHandler represents the type of fuction which accpets data nd returns processed result
-type OperationHandler func(interface{}) interface{}
-
 // Pipe allows to process the chainable functional operations
-func Pipe(fns ...(FunctionAsArg)) OperationHandler {
+func Pipe(fns ...(func(arg interface{}) interface{})) func(interface{}) interface{} {
 	return func(data interface{}) interface{} {
 		var result interface{} = data
 		for _, fn := range fns {
@@ -22,7 +16,7 @@ func Pipe(fns ...(FunctionAsArg)) OperationHandler {
 }
 
 // Compose allows to process the chainable functional operations in reverse order
-func Compose(fns ...(FunctionAsArg)) OperationHandler {
+func Compose(fns ...(func(arg interface{}) interface{})) func(interface{}) interface{} {
 	return func(data interface{}) interface{} {
 		var result interface{} = data
 
