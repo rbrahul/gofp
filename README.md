@@ -23,7 +23,9 @@ go get github.com/rbrahul/gofp
 ```
 
 ## How to use?
-This the example how you can implement pipe operations using `gofp`
+
+This the example which describes how you can implement `pipe` operations using `gofp`
+
 ```go
 
 package main
@@ -73,7 +75,7 @@ func main() {
 
 ### Most commonly used utility functions for Collection or slice
 
-### Map
+### Map()
 Returns a new slice executing the iterator function on each element. Map has 2 parameters, 1st one is slice and 2nd one is the iterator function. The iterator function must have 2 parameters, index and current value of that iteration.
 
 ```go
@@ -87,7 +89,7 @@ Returns a new slice executing the iterator function on each element. Map has 2 p
     ...
 ```
 
-### Filter
+### Filter()
 Returns a new slice containing the filtered elements. The new slice contains those elements who satisfy the condition of the iterator function. Filter has 2 parameters, 1st one is the slice and 2nd one is the iterator function. The iterator function must have 2 parameters, index and current value of that iteration.
 
 ```go
@@ -102,7 +104,7 @@ Returns a new slice containing the filtered elements. The new slice contains tho
 ```
 
 
-### Find
+### Find()
 Returns the first matched element of the slice who satisfy the condition of iterator function. If there is no such element that satisfy the condition of the function then nil is returned. Find has 2 parameters, 1st one is the slice and 2nd one is the iterator function. The iterator function must have 2 parameters, index and current value of that iteration.
 
 ```go
@@ -118,7 +120,7 @@ Returns the first matched element of the slice who satisfy the condition of iter
     fmt.Println(user) //Output:  {"name": "Raymond", "sex": "male", "age": 20}
     ...
 ```
-### Reduce
+### Reduce()
 Executes a iterator function on each element of the slice, resulting in single output accumulated value. Reducer has 3 parameters, 1st one is the slice and 2nd one is the iterator function and 3rd one is the initial value. The iterator function must have 3 parameters which are index, current value of that iteration and accumulated value or result of previous iterations.
 
 ```go
@@ -130,7 +132,7 @@ Executes a iterator function on each element of the slice, resulting in single o
     fmt.Println(reducedItems) //Output:  100
     ...
 ```
-### Every
+### Every()
 Returns `true` if each element matches the condition of the given iterator function. If there is any element that doesn't satisfy the condition of the function then it returns `false`. Every has 2 parameters, 1st one is the slice and 2nd one is the iterator function. And the iterator function must have 2 parameters, index and current value of that iteration.
 
 ```go
@@ -143,7 +145,7 @@ Returns `true` if each element matches the condition of the given iterator funct
     ...
 ```
 
-### Any
+### Any()
 Returns `true` if any of the element matches the condition of the given iterator function. If there is no such element that satisfy the condition of the function then it returns `false`. Any has 2 parameters, 1st one is the slice and 2nd one is the iterator function. And the iterator function must have 2 parameters, index and current value of that iteration.
 
 ```go
@@ -156,7 +158,7 @@ Returns `true` if any of the element matches the condition of the given iterator
     ...
 ```
 
-### GroupBy
+### GroupBy()
 
 Returns a new map composed of keys generated from the results of running each element of slice thru iterator function. The order of grouped values is determined by the order they occur in slice. GroupBy has 2 parameters, 1st one is the slice and 2nd one is the iterator function. The output of the iterator function will be used as the key of the newly created group or map. And the iterator function must have 2 parameters, index and current value of that iteration.
 
@@ -185,7 +187,7 @@ Returns a new map composed of keys generated from the results of running each el
     ...
 ```
 
-### Chunk
+### Chunk()
 
 Returns a new slice(chunks) of slices. Every slice has fixed number of elements which was given as a limit in the 2nd parameter. Chunk accepts 2 parameters, 1st one is the slice and 2nd one is the limit which will define the maxium number of elements in each slice.
 
@@ -195,7 +197,7 @@ Returns a new slice(chunks) of slices. Every slice has fixed number of elements 
     fmt.Println(chunkedItems) //Output:  {{1,2},{3,4},{5}}
     ...
 ```
-### Reverse
+### Reverse()
 
 Returns a new slice with all the elements in reveresed order. Reverse accepsts 1 parameter which a slice.
 
@@ -206,7 +208,7 @@ Returns a new slice with all the elements in reveresed order. Reverse accepsts 1
     ...
 ```
 
-### Range
+### Range()
 
 Returns a new slice of range where the value starts from 1st parameter to the 2nd parameter. Reverse accepsts 2 parameters, 1st one is the starting value 2nd one is the maximum value in the range.
 
@@ -217,7 +219,7 @@ Returns a new slice of range where the value starts from 1st parameter to the 2n
     ...
 ```
 
-### Uniq
+### Uniq()
 
 Returns a new slice where each elements are unique removing all the duplicate elements. `Uniq` accepsts 1 parameter which is a slice.
 
@@ -229,7 +231,7 @@ Returns a new slice where each elements are unique removing all the duplicate el
     ...
 ```
 
-### Head
+### Head()
 
 Returns the first matched element of the slice. Head accepsts 1 parameter which a slice.
 
@@ -245,7 +247,7 @@ Returns the first matched element of the slice. Head accepsts 1 parameter which 
     ...
 ```
 
-### Tail
+### Tail()
 
 Returns the last matched element of the slice. Head accepsts 1 parameter which a slice.
 
@@ -261,7 +263,7 @@ Returns the last matched element of the slice. Head accepsts 1 parameter which a
     ...
 ```
 
-### Fill
+### Fill()
 
 Returns a new slice where every elements is replaced from the start to end index with the given string. `Fill` has 4 arguments first 2 are required and last two are optional. First one is slice, 2nd one is the string which will be used as substitute while filling/replacing and 3rd one is the starting index and 4th one is the end index. If start and end index is not given then it fills all the elements with given string.
 
@@ -272,7 +274,7 @@ Returns a new slice where every elements is replaced from the start to end index
     ...
 ```
 
-### IndexOf
+### IndexOf()
 
 Returns the index of the first occurance of any element in the slice which is equal to the given item.
 
@@ -283,7 +285,7 @@ Returns the index of the first occurance of any element in the slice which is eq
     ...
 ```
 
-### Contains
+### Contains()
 
 Returns `true` if the given item exists in the slice or false otherwise.
 
@@ -294,7 +296,7 @@ Returns `true` if the given item exists in the slice or false otherwise.
     ...
 ```
 
-### ChooseRandom
+### ChooseRandom()
 
 Returns a randomly selected element of the slice. It has one parameter which is a slice.
 
@@ -305,7 +307,7 @@ Returns a randomly selected element of the slice. It has one parameter which is 
     ...
 ```
 
-### Shuffle
+### Shuffle()
 
 Returns a new slice where elements are randomly ordered(shuffled). It accepts one parameter which is slice.
 
@@ -313,5 +315,158 @@ Returns a new slice where elements are randomly ordered(shuffled). It accepts on
     ...
     shuffledItems := ChooseRandom([]interface{}{1, 2, 3, 4, 5, 10, 100})
     fmt.Println(shuffledItems) //Output: {100, 2, 1, 4, 5, 3, 10} 
+    ...
+```
+## Map related utitlity function:
+
+### Keys():
+
+Returns a slice of keys of the map.  
+
+```go
+    ...
+    keys := Keys(map[string]interface{}{
+        "firstName": "John", 
+        "lastName": "Doe",
+        "age": 32
+        })
+    fmt.Println(keys) //Output: {firstName, lastName, age}
+    ...
+```
+
+### Values():
+
+Returns a slice of values of the map.
+
+```go
+    ...
+    values := Values(map[string]interface{}{
+        "firstName": "John", 
+        "lastName": "Doe",
+        "age": 32
+        })
+    fmt.Println(values) //Output: {John, Doe, 32}
+    ...
+```
+
+### Has():
+
+Returns `true` if key exists in the map or false otherwise. It has two parametes 1st one is a map and 2nd one is key.
+
+```go
+    ...
+    exists := Has(map[string]interface{}{
+        "firstName": "John", 
+        "lastName": "Doe",
+        "age": 32
+        }, "age")
+    fmt.Println(exists) //Output: true
+    ...
+```
+
+### Pick():
+
+Returns a new map containing only properties which are specified as 2nd argument. It accepts 2 parameters 1st one is the map and second one is the keys which is a slice of string.
+
+```go
+    ...
+	pickedData := Pick(map[string]interface{}{
+        "firstName": "John", 
+        "lastName": "Doe",
+        "age": 32
+        }, []string{"lastName"})
+    fmt.Println(pickedData) //Output: {"lastName": "Doe"}
+    ...
+```
+
+### Omit():
+
+Returns a new map omitting the given keys of that map. It accepts 2 parameters 1st one is the map and second one is the keys which is a slice of string.
+
+```go
+    ...
+	omittedData := Omit(map[string]interface{}{
+        "firstName": "John", 
+        "lastName": "Doe",
+        "age": 32
+        }, []string{"lastName"})
+    fmt.Println(omittedData) //Output: {"firstName": "John", "age": 32}
+    ...
+```
+
+### MapValues():
+
+`MapValues` works similarly to the `Map()` unlikely it deals with only map. It returns a new map applying an iterator function on each `value` of the map. The iterator function transforms the each value.  
+
+```go
+    ...
+	mappedValues := MapValues(map[string]interface{}{
+        "firstName": "john",
+        "lastName": "doe",
+        "gender": "unknown"}, func(value interface{}) interface{} {
+		return strings.Title(value.(string))
+	})
+    fmt.Println(mappedValues) //Output: {"firstName": "JOHN",  "lastName":"DOE": 32, "gender":"UNKNOWN"}
+    ...
+```
+
+### MapKeys():
+
+`MapKeys` works similarly to the `Map()` unlikely it deals with only map. It returns a new map applying an iterator function on each `key` of the map. The iterator function transforms the each `key`.  
+
+```go
+    ...
+	mappedKeys := MapKeys(map[string]interface{}{
+        "firstName": "john",
+        "lastName": "doe",
+        "gender": "unknown"}, func(value interface{}) interface{} {
+		return strings.Title(value.(string))
+	})
+    fmt.Println(mappedKeys) //Output: {"FIRSTNAME": "john","LASTNAME": "doe","GENDER": "unknown"}
+    ...
+```
+
+### Get():
+
+`Get()` returns the value of a given path. If no data is available in the given path then `nil` is returned. It deals with `map`, `slice`, and `struct`. It accepts 3 parameters, `data`, `path` and `fallback value`. 3rd parameter is optional. 
+
+```go
+    ...
+	data := map[string]interface{}{
+		"age":  30,
+		"male": true,
+		"contacts": map[string]interface{}{
+			"office": 12345,
+			"fax": map[string]interface{}{
+				"uk": "+44-208-1234567",
+			},
+			"address": map[string]interface{}{
+				"post_code":    "SW3",
+				"street":       "10 Downing Street",
+				"geo_location": []string{"51.529011463529636", "-0.1098365614770662"},
+			},
+		},
+	}
+	geoLocationFromGet := Get(data, "contacts.address.geo_location.0")
+    fmt.Println(geoLocationFromGet) //Output: 51.529011463529636
+    ...
+```
+
+### Extend():
+
+`Extend()` returns a new map extending the values with a given map. Where extend or override operation happens deeply(recursively). It accepts two parameters both are map. 1st map gets extended with the 2nd map.
+
+```go
+    ...
+	extendedMap := Extends(
+        map[string]interface{}{
+        "firstName": "john",
+        "lastName": "doe",
+        "gender": "unknown"
+        },
+         map[string]interface{}{
+        "gender": "male"
+        })
+    fmt.Println(extendedMap) //Output: {"firstName": "john","lastName": "doe","gender": "male"}
     ...
 ```
