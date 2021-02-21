@@ -1,4 +1,5 @@
 ![test workflow](https://github.com/rbrahul/gofp/actions/workflows/go.yml/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/rbrahul/gofp)](https://goreportcard.com/report/github.com/rbrahul/gofp)
 
 ## A simple Utility library for Go
 
