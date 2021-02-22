@@ -8,7 +8,7 @@
 
 ## A simple Utility library for Go
 
-Go does not provide a many essential built in functions when it comes to data structure such as **slice** and **map**. This library provides a list of most frequently needed utility functions which are inspired by lodash(a Javascript Utility library).
+Go does not provide many essential built in functions when it comes to the data structure such as **slice** and **map**. This library provides a list of most frequently needed utility functions which are inspired by lodash(a Javascript Utility library).
 
 ## Main features of gofp
 
