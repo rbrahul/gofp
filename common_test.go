@@ -26,6 +26,13 @@ func Test_IntSlice(t *testing.T) {
 	}
 }
 
+func Test_Float64Slice(t *testing.T) {
+	slice := Float64Slice([]interface{}{1.4, 2.5, 3.1})
+	if reflect.TypeOf(slice).Elem().Kind() != reflect.Float64 {
+		t.Errorf("Float64Slice() got= %q, want %q", reflect.TypeOf(slice).Elem().Kind(), reflect.Float64)
+	}
+}
+
 func Test_Randomer(t *testing.T) {
 	randomer := Randomer()
 	if reflect.TypeOf(randomer.Intn(5)).Kind() != reflect.Int {
