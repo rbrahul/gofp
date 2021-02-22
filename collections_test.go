@@ -89,7 +89,7 @@ func Test_GroupBy(t *testing.T) {
 	data, _ := groupedData["20"]
 	numItemsInsideGroup20 := len(data.([]interface{}))
 	if numItemsInsideGroup20 != 2 {
-		t.Errorf("Find() = %v, want %v", numItemsInsideGroup20, 2)
+		t.Errorf("GroupBy() = %v, want %v", numItemsInsideGroup20, 2)
 	}
 }
 
@@ -103,14 +103,14 @@ func Test_Head(t *testing.T) {
 func Test_Tail(t *testing.T) {
 	lastElement := Tail([]interface{}{10, 20, 30, 40, 50})
 	if lastElement != 50 {
-		t.Errorf("Head() = %v, want %v", lastElement, 50)
+		t.Errorf("Tail() = %v, want %v", lastElement, 50)
 	}
 }
 
 func Test_Reverse(t *testing.T) {
 	reveresed := Reverse([]interface{}{10, 20, 30, 40, 50})
 	if reveresed[0].(int) != 50 && reveresed[len(reveresed)-1].(int) != 10 {
-		t.Errorf("Head() = %v, want %v", reveresed[0], 50)
+		t.Errorf("Reverse() = %v, want %v", reveresed[0], 50)
 	}
 }
 
@@ -150,6 +150,22 @@ func Test_Contains(t *testing.T) {
 	// 4
 	exists := Contains([]interface{}{1, 2, 2, 3, 10, 4, 5, 10, 100}, 10)
 	if !exists {
-		t.Errorf("IndexOf() = %v, want %v", exists, true)
+		t.Errorf("Contains() = %v, want %v", exists, true)
+	}
+}
+
+func Test_Shuffle(t *testing.T) {
+	shuffledItems := Shuffle([]interface{}{1, 2, 3, 4, 5})
+	hasSameItemsInSamePosition := shuffledItems[0].(int) == 1 && shuffledItems[1].(int) == 2 && shuffledItems[2].(int) == 3 && shuffledItems[3].(int) == 4 && shuffledItems[4].(int) == 5
+	if hasSameItemsInSamePosition {
+		t.Errorf("Shuffle() = %v, want %v", hasSameItemsInSamePosition, false)
+	}
+}
+
+func Test_ChooseRandom(t *testing.T) {
+	inputSlice := []interface{}{1, 2, 3, 4, 5}
+	item := ChooseRandom(inputSlice)
+	if !Contains(inputSlice, item) {
+		t.Errorf("ChooseRandom() = %v, want %v", Contains(inputSlice, item), true)
 	}
 }
