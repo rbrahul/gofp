@@ -9,7 +9,7 @@ func Map(items []interface{}, fn func(index int, item interface{}) interface{}) 
 	return mappedItems
 }
 
-//Fill substitues the elements of slice with given string from the start to end position
+//Fill substitutes the elements of slice with given string from the start to end position
 func Fill(args ...interface{}) []interface{} {
 	var (
 		filler string
