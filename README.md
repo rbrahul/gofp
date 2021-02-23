@@ -477,3 +477,4 @@ Returns a new map omitting the given keys of that map. It accepts 2 parameters 1
     ...
 ```
 
+[![Analytics](https://ga-beacon.appspot.com/UA-99614416-10/welcome-page)](https://github.com/rbrahul/gofp)
